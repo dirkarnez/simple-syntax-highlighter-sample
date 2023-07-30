@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+.keyword-style {
+    color: mediumblue;
+   }
+</style>
+</head>
+<body>
+
+<div id="myDiv">
+
+</div>
+
+<script>
+
+//w3CodeColor();
+
+// Dummy Abstract Syntax Tree (AST)
+const ast = [
+  { type: 'keyword', value: 'const' },
+  { type: 'identifier', value: 'myVariable' },
+  { type: 'operator', value: '=' },
+  { type: 'string', value: '"Hello, world!"' },
+  { type: 'comment', value: '// This is a comment' }
+];
+
+// Mapping of token types to CSS classes
+const styles = {
+  keyword: 'keyword-style',
+  string: 'string-style',
+  comment: 'comment-style'
+};
+
+// Syntax highlighting function
+function highlightCode(code) {
+  // Split the code into individual tokens
+  const tokens = code.split(' ');
+
+  // Create an array to store the highlighted code
+  const highlightedCode = [];
+
+  // Iterate over each token
+  for (const astNode of ast) {
+  	const styleClass = styles[astNode.type] || '';
+  	highlightedCode.push(`<span class="${styleClass}">${astNode.value}</span>`);
+  }
+  
+  // Join the highlighted tokens back into a string
+  const highlightedText = highlightedCode.join(' ');
+
+  // Return the highlighted code
+  return highlightedText;
+}
+
+// Example usage
+const code = 'const myVariable = "Hello, world!"; // This is a comment';
+document.getElementById("myDiv").innerHTML = highlightCode(code);
+
+</script>
+</body>
+</html>
